@@ -32,6 +32,8 @@ Um projeto de CRUD simples desenvolvido com Go, utilizando a arquitetura MVC e t
 
 ![Em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=RED&style=for-the-badge)
 
+![Concluído](http://img.shields.io/static/v1?label=STATUS&message=CONCLUIDO&color=GREEN&style=for-the-badge)
+
 ## Descrição
 
 Este projeto implementa as operações básicas de CRUD (Create, Read, Update, Delete) para gerenciamento de produtos. Ele utiliza a linguagem Go com a estrutura MVC, conectando-se a um banco de dados MySQL para armazenar as informações.
