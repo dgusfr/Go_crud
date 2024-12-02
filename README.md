@@ -38,3 +38,11 @@ Um projeto de CRUD simples desenvolvido com Go, utilizando a arquitetura MVC e t
 ## Descrição
 
 Este projeto implementa as operações básicas de CRUD (Create, Read, Update, Delete) para gerenciamento de produtos. Ele utiliza a linguagem Go com a estrutura MVC, conectando-se a um banco de dados MySQL para armazenar as informações.
+
+## Funcionalidades
+
+- Adicionar novos produtos ao sistema.
+- Listar todos os produtos cadastrados.
+- Editar as informações de produtos existentes.
+- Remover produtos do sistema.
+- Interface web simples para interação com o sistema.
