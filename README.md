@@ -21,10 +21,10 @@ Um projeto de CRUD simples desenvolvido com Go, utilizando a arquitetura MVC e t
 
 <div style="display: flex; flex-direction: row;">
   <div style="margin-right: 20px; display: flex; justify-content: flex-start;">
-    <img src="img/go.png" alt="Logo Linguagem Go" width="200"/>
+    <img src="images/go.png" alt="Logo Linguagem Go" width="200"/>
   </div>
   <div style="margin-right: 20px; display: flex; justify-content: flex-start;">
-    <img src="img/mysql.png" alt="Logo MySQL" width="200"/>
+    <img src="images/mysql.png" alt="Logo MySQL" width="200"/>
   </div>
 </div>
 
