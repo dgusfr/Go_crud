@@ -46,3 +46,7 @@ Este projeto implementa as operações básicas de CRUD (Create, Read, Update, D
 - Editar as informações de produtos existentes.
 - Remover produtos do sistema.
 - Interface web simples para interação com o sistema.
+
+## Autor
+
+Desenvolvido por Diego Franco.
