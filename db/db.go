@@ -7,7 +7,7 @@ import (
 )
 
 func ConectaComBancoDeDados() *sql.DB {
-	conexao := "user=root dbname=go_crud password=12345678 host=localhost sslmode=disable"
+	conexao := "user=root dbname=go_crud password=1234 host=localhost sslmode=disable"
 	db, err := sql.Open("postgres", conexao)
 	if err != nil {
 		panic(err.Error())
