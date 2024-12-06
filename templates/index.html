@@ -1,10 +1,12 @@
 {{define "Index"}}
+<!DOCTYPE html>
+<html lang="pt-BR">
 
 {{template "_head"}}
 
-{{template "_menu"}}
-
 <body>
+    {{template "_menu"}}
+
     <div class="container">
         <section class="card">
             <div>
@@ -15,6 +17,7 @@
                             <th>Descrição</th>
                             <th>Preço</th>
                             <th>Quantidade</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -22,30 +25,31 @@
                         <tr>
                             <td>{{.Nome}}</td>
                             <td>{{.Descricao}}</td>
-                            <td>{{.Preco}}</td>
+                            <td>{{printf "R$ %.2f" .Preco}}</td>
                             <td>{{.Quantidade}}</td>
-                            <td><a href="edit?id={{.Id}}" class="btn btn-info">Editar</a></td>
-                            <td><button onclick="onDelete('{{.Id}}')" class="btn btn-danger">Deletar</button></td>
+                            <td>
+                                <a href="edit?id={{.Id}}" class="btn btn-info btn-sm">Editar</a>
+                                <button onclick="onDelete('{{.Id}}')" class="btn btn-danger btn-sm">Deletar</button>
+                            </td>
                         </tr>
                         {{end}}
                     </tbody>
                 </table>
             </div>
         </section>
-        <div class="card-footer">
+        <div class="card-footer text-center">
             <a href="/new" class="btn btn-primary mb-2">Criar novo produto</a>
         </div>
     </div>
+
+    <script>
+        function onDelete(id) {
+            if (confirm("Tem certeza que deseja deletar esse produto?")) {
+                window.location = "/delete?id=" + id;
+            }
+        }
+    </script>
 </body>
 
-<script>
-    function onDelete(id) {
-        let resposta = confirm("Tem certeza que deseja deletar esse produto?")
-        if (resposta) {
-            window.location = "/delete?id=" + id
-        }
-    }
-</script>
- 
 </html>
 {{end}}
