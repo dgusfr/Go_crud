@@ -6,11 +6,18 @@ import (
 	"github.com/Alura/controllers"
 )
 
+// CarregaRotas configura todas as rotas da aplicação
 func CarregaRotas() {
-	http.HandleFunc("/", controllers.Index)
-	http.HandleFunc("/new", controllers.New)
-	http.HandleFunc("/insert", controllers.Insert)
-	http.HandleFunc("/delete", controllers.Delete)
-	http.HandleFunc("/edit", controllers.Edit)
-	http.HandleFunc("/update", controllers.Update)
+	routes := map[string]http.HandlerFunc{
+		"/":        controllers.Index,
+		"/new":     controllers.New,
+		"/insert":  controllers.Insert,
+		"/delete":  controllers.Delete,
+		"/edit":    controllers.Edit,
+		"/update":  controllers.Update,
+	}
+
+	for path, handler := range routes {
+		http.HandleFunc(path, handler)
+	}
 }
