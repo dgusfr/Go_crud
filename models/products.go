@@ -1,92 +1,87 @@
-package models
+package products
 
 import (
 	"database/sql"
 	"log"
 
-	"github.com/alura/db"
+	"github.com/Alura/database"
 )
 
-type Produto struct {
+type Product struct {
 	Id         int
-	Nome       string
-	Descricao  string
-	Preco      float64
-	Quantidade int
+	Name       string
+	Description string
+	Price      float64
+	Quantity   int
 }
 
-// BuscaTodosOsProdutos retorna todos os produtos do banco de dados
-func BuscaTodosOsProdutos() []Produto {
-	db := db.ConectaComBancoDeDados()
+func GetAllProducts() []Product {
+	db := database.ConnectToDatabase()
 	defer db.Close()
 
-	rows, err := db.Query("SELECT id, nome, descricao, preco, quantidade FROM produtos")
+	rows, err := db.Query("SELECT id, name, description, price, quantity FROM products")
 	if err != nil {
-		log.Fatalf("Erro ao buscar produtos: %v", err)
+		log.Fatalf("Error fetching products: %v", err)
 	}
 	defer rows.Close()
 
-	var produtos []Produto
+	var products []Product
 
 	for rows.Next() {
-		var produto Produto
-		if err := rows.Scan(&produto.Id, &produto.Nome, &produto.Descricao, &produto.Preco, &produto.Quantidade); err != nil {
-			log.Fatalf("Erro ao ler produto: %v", err)
+		var product Product
+		if err := rows.Scan(&product.Id, &product.Name, &product.Description, &product.Price, &product.Quantity); err != nil {
+			log.Fatalf("Error reading product: %v", err)
 		}
-		produtos = append(produtos, produto)
+		products = append(products, product)
 	}
 
-	return produtos
+	return products
 }
 
-// CriaNovoProduto insere um novo produto no banco de dados
-func CriaNovoProduto(nome, descricao string, preco float64, quantidade int) {
-	db := db.ConectaComBancoDeDados()
+func CreateNewProduct(name, description string, price float64, quantity int) {
+	db := database.ConnectToDatabase()
 	defer db.Close()
 
-	query := "INSERT INTO produtos (nome, descricao, preco, quantidade) VALUES ($1, $2, $3, $4)"
-	if _, err := db.Exec(query, nome, descricao, preco, quantidade); err != nil {
-		log.Fatalf("Erro ao criar produto: %v", err)
+	query := "INSERT INTO products (name, description, price, quantity) VALUES ($1, $2, $3, $4)"
+	if _, err := db.Exec(query, name, description, price, quantity); err != nil {
+		log.Fatalf("Error creating product: %v", err)
 	}
 }
 
-// DeletaProduto remove um produto do banco de dados pelo ID
-func DeletaProduto(id string) {
-	db := db.ConectaComBancoDeDados()
+func DeleteProduct(id string) {
+	db := database.ConnectToDatabase()
 	defer db.Close()
 
-	query := "DELETE FROM produtos WHERE id = $1"
+	query := "DELETE FROM products WHERE id = $1"
 	if _, err := db.Exec(query, id); err != nil {
-		log.Fatalf("Erro ao deletar produto: %v", err)
+		log.Fatalf("Error deleting product: %v", err)
 	}
 }
 
-// EditaProduto retorna um produto específico para edição
-func EditaProduto(id string) Produto {
-	db := db.ConectaComBancoDeDados()
+func EditProduct(id string) Product {
+	db := database.ConnectToDatabase()
 	defer db.Close()
 
-	query := "SELECT id, nome, descricao, preco, quantidade FROM produtos WHERE id = $1"
+	query := "SELECT id, name, description, price, quantity FROM products WHERE id = $1"
 	row := db.QueryRow(query, id)
 
-	var produto Produto
-	if err := row.Scan(&produto.Id, &produto.Nome, &produto.Descricao, &produto.Preco, &produto.Quantidade); err != nil {
+	var product Product
+	if err := row.Scan(&product.Id, &product.Name, &product.Description, &product.Price, &product.Quantity); err != nil {
 		if err == sql.ErrNoRows {
-			log.Fatalf("Produto com ID %s não encontrado", id)
+			log.Fatalf("Product with ID %s not found", id)
 		}
-		log.Fatalf("Erro ao buscar produto: %v", err)
+		log.Fatalf("Error fetching product: %v", err)
 	}
 
-	return produto
+	return product
 }
 
-// AtualizaProduto atualiza os dados de um produto no banco de dados
-func AtualizaProduto(id int, nome, descricao string, preco float64, quantidade int) {
-	db := db.ConectaComBancoDeDados()
+func UpdateProduct(id int, name, description string, price float64, quantity int) {
+	db := database.ConnectToDatabase()
 	defer db.Close()
 
-	query := "UPDATE produtos SET nome = $1, descricao = $2, preco = $3, quantidade = $4 WHERE id = $5"
-	if _, err := db.Exec(query, nome, descricao, preco, quantidade, id); err != nil {
-		log.Fatalf("Erro ao atualizar produto: %v", err)
+	query := "UPDATE products SET name = $1, description = $2, price = $3, quantity = $4 WHERE id = $5"
+	if _, err := db.Exec(query, name, description, price, quantity, id); err != nil {
+		log.Fatalf("Error updating product: %v", err)
 	}
 }
