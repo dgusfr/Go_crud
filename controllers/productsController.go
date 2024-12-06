@@ -6,113 +6,107 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/alura/models"
+	"github.com/Alura/models/products"
 )
 
 var templates = template.Must(template.ParseGlob("views/*.html"))
 
-// Index exibe a lista de produtos
 func Index(w http.ResponseWriter, r *http.Request) {
-	produtos := models.BuscaTodosOsProdutos()
-	if err := templates.ExecuteTemplate(w, "Index", produtos); err != nil {
-		log.Printf("Erro ao renderizar template Index: %v", err)
-		http.Error(w, "Erro interno do servidor", http.StatusInternalServerError)
+	allProducts := products.GetAllProducts()
+	if err := templates.ExecuteTemplate(w, "Index", allProducts); err != nil {
+		log.Printf("Error rendering Index template: %v", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}
 }
 
-// New exibe o formulário para criar um novo produto
 func New(w http.ResponseWriter, r *http.Request) {
 	if err := templates.ExecuteTemplate(w, "New", nil); err != nil {
-		log.Printf("Erro ao renderizar template New: %v", err)
-		http.Error(w, "Erro interno do servidor", http.StatusInternalServerError)
+		log.Printf("Error rendering New template: %v", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}
 }
 
-// Insert insere um novo produto no banco de dados
 func Insert(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
-		nome := r.FormValue("nome")
-		descricao := r.FormValue("descricao")
-		preco := r.FormValue("preco")
-		quantidade := r.FormValue("quantidade")
+		name := r.FormValue("name")
+		description := r.FormValue("description")
+		price := r.FormValue("price")
+		quantity := r.FormValue("quantity")
 
-		precoFloat, err := strconv.ParseFloat(preco, 64)
+		priceFloat, err := strconv.ParseFloat(price, 64)
 		if err != nil {
-			log.Printf("Erro ao converter preço: %v", err)
-			http.Error(w, "Preço inválido", http.StatusBadRequest)
+			log.Printf("Error converting price: %v", err)
+			http.Error(w, "Invalid price format", http.StatusBadRequest)
 			return
 		}
 
-		quantidadeInt, err := strconv.Atoi(quantidade)
+		quantityInt, err := strconv.Atoi(quantity)
 		if err != nil {
-			log.Printf("Erro ao converter quantidade: %v", err)
-			http.Error(w, "Quantidade inválida", http.StatusBadRequest)
+			log.Printf("Error converting quantity: %v", err)
+			http.Error(w, "Invalid quantity format", http.StatusBadRequest)
 			return
 		}
 
-		models.CriaNovoProduto(nome, descricao, precoFloat, quantidadeInt)
+		products.CreateNewProduct(name, description, priceFloat, quantityInt)
 	}
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 
-// Delete remove um produto pelo ID
 func Delete(w http.ResponseWriter, r *http.Request) {
 	id := r.URL.Query().Get("id")
 	if id == "" {
-		http.Error(w, "ID do produto não fornecido", http.StatusBadRequest)
+		http.Error(w, "Product ID not provided", http.StatusBadRequest)
 		return
 	}
 
-	models.DeletaProduto(id)
+	products.DeleteProduct(id)
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 
-// Edit exibe o formulário de edição de um produto
 func Edit(w http.ResponseWriter, r *http.Request) {
 	id := r.URL.Query().Get("id")
 	if id == "" {
-		http.Error(w, "ID do produto não fornecido", http.StatusBadRequest)
+		http.Error(w, "Product ID not provided", http.StatusBadRequest)
 		return
 	}
 
-	produto := models.EditaProduto(id)
-	if err := templates.ExecuteTemplate(w, "Edit", produto); err != nil {
-		log.Printf("Erro ao renderizar template Edit: %v", err)
-		http.Error(w, "Erro interno do servidor", http.StatusInternalServerError)
+	product := products.EditProduct(id)
+	if err := templates.ExecuteTemplate(w, "Edit", product); err != nil {
+		log.Printf("Error rendering Edit template: %v", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}
 }
 
-// Update atualiza os dados de um produto no banco de dados
 func Update(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
 		id := r.FormValue("id")
-		nome := r.FormValue("nome")
-		descricao := r.FormValue("descricao")
-		preco := r.FormValue("preco")
-		quantidade := r.FormValue("quantidade")
+		name := r.FormValue("name")
+		description := r.FormValue("description")
+		price := r.FormValue("price")
+		quantity := r.FormValue("quantity")
 
 		idInt, err := strconv.Atoi(id)
 		if err != nil {
-			log.Printf("Erro ao converter ID: %v", err)
-			http.Error(w, "ID inválido", http.StatusBadRequest)
+			log.Printf("Error converting ID: %v", err)
+			http.Error(w, "Invalid ID format", http.StatusBadRequest)
 			return
 		}
 
-		precoFloat, err := strconv.ParseFloat(preco, 64)
+		priceFloat, err := strconv.ParseFloat(price, 64)
 		if err != nil {
-			log.Printf("Erro ao converter preço: %v", err)
-			http.Error(w, "Preço inválido", http.StatusBadRequest)
+			log.Printf("Error converting price: %v", err)
+			http.Error(w, "Invalid price format", http.StatusBadRequest)
 			return
 		}
 
-		quantidadeInt, err := strconv.Atoi(quantidade)
+		quantityInt, err := strconv.Atoi(quantity)
 		if err != nil {
-			log.Printf("Erro ao converter quantidade: %v", err)
-			http.Error(w, "Quantidade inválida", http.StatusBadRequest)
+			log.Printf("Error converting quantity: %v", err)
+			http.Error(w, "Invalid quantity format", http.StatusBadRequest)
 			return
 		}
 
-		models.AtualizaProduto(idInt, nome, descricao, precoFloat, quantidadeInt)
+		products.UpdateProduct(idInt, name, description, priceFloat, quantityInt)
 	}
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
