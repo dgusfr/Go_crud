@@ -5,7 +5,7 @@ Um projeto simples de CRUD (Create, Read, Update, Delete) desenvolvido em Go, ut
 ## Interface
 
 <div align="center">
-  <img src="images/interface.png" alt="Imagem do Projeto" width="100">
+  <img src="images/interface.png" alt="Imagem do Projeto" width="900">
 </div>
 
 ## Sumário
