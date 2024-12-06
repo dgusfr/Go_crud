@@ -9,7 +9,7 @@ import (
 	"github.com/alura/models"
 )
 
-var templates = template.Must(template.ParseGlob("templates/*.html"))
+var templates = template.Must(template.ParseGlob("views/*.html"))
 
 // Index exibe a lista de produtos
 func Index(w http.ResponseWriter, r *http.Request) {
