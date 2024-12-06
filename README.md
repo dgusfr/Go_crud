@@ -1,11 +1,11 @@
-# Gerenciador de Produtos em Go
+# CRUD de Produtos com Go
 
-Um projeto CRUD simples desenvolvido em Go, utilizando a arquitetura MVC e PostgreSQL para gerenciamento de produtos.
+Um projeto simples de CRUD (Create, Read, Update, Delete) desenvolvido em Go, utilizando arquitetura MVC, banco de dados PostgreSQL e templates HTML para gerenciamento de produtos.
 
 ## Interface
 
 <div align="center">
-  <img src="img/logo.png" alt="Imagem do Projeto" width="900">
+  <img src="img/interface.png" alt="Imagem do Projeto" width="100">
 </div>
 
 ## Sumário
@@ -24,7 +24,10 @@ Um projeto CRUD simples desenvolvido em Go, utilizando a arquitetura MVC e Postg
     <img src="img/go.png" alt="Logo Go" width="100"/>
   </div>
   <div style="margin-right: 20px; display: flex; justify-content: flex-start;">
-    <img src="img/postgres.png" alt="Logo PostgreSQL" width="100"/>
+    <img src="img/html.png" alt="Logo HTML" width="100"/>
+  </div>
+  <div style="margin-right: 20px; display: flex; justify-content: flex-start;">
+    <img src="img/postgresql.png" alt="Logo PostgreSQL" width="100"/>
   </div>
 </div>
 
@@ -34,26 +37,26 @@ Um projeto CRUD simples desenvolvido em Go, utilizando a arquitetura MVC e Postg
 
 ## Descrição
 
-Este projeto implementa operações básicas de CRUD (Create, Read, Update, Delete) para gerenciar produtos, incluindo funcionalidades para criar, listar, editar e excluir produtos armazenados em um banco de dados PostgreSQL. O projeto utiliza templates HTML para exibição e manipulação de dados.
+Este projeto é uma aplicação web para gerenciar produtos em um banco de dados. Ele inclui funcionalidades para criar, visualizar, editar e excluir produtos, utilizando a linguagem Go com PostgreSQL como banco de dados e templates HTML para interface do usuário.
 
 ## Funcionalidades
 
-- Criar novos produtos.
 - Listar todos os produtos cadastrados.
+- Adicionar novos produtos.
 - Editar informações de produtos existentes.
-- Excluir produtos do sistema.
+- Remover produtos do banco de dados.
 - Interface web simples e funcional.
 
 ## Como Usar
 
-1. **Pré-requisitos**:
+1. **Configurar o banco de dados**:
 
-   - Go instalado em sua máquina.
-   - Banco de dados PostgreSQL configurado e rodando.
-
-2. **Configurar o banco de dados**:
-
-   - Crie um banco de dados chamado `go_crud` e configure a tabela `produtos`:
+   - Certifique-se de ter o PostgreSQL instalado e rodando.
+   - Crie o banco de dados `go_crud`:
+     ```sql
+     CREATE DATABASE go_crud;
+     ```
+   - Crie a tabela `produtos`:
      ```sql
      CREATE TABLE produtos (
          id SERIAL PRIMARY KEY,
@@ -64,24 +67,23 @@ Este projeto implementa operações básicas de CRUD (Create, Read, Update, Dele
      );
      ```
 
-3. **Configurar o projeto**:
+2. **Configurar o arquivo `db.go`**:
 
-   - No arquivo `db/db.go`, atualize a string de conexão com as credenciais do seu banco de dados:
+   - No arquivo `db/db.go`, atualize as credenciais de conexão:
      ```go
      conexao := "user=SEU_USUARIO dbname=go_crud password=SUA_SENHA host=localhost sslmode=disable"
      ```
 
-4. **Rodar a aplicação**:
+3. **Iniciar a aplicação**:
 
-   - Navegue até o diretório do projeto e execute:
+   - Execute o comando:
      ```bash
      go run main.go
      ```
-   - Acesse a aplicação em seu navegador pelo endereço: [http://localhost:8000](http://localhost:8000).
 
-5. **Testar as funcionalidades**:
-   - Use as opções da interface para adicionar, listar, editar ou excluir produtos.
+4. **Acessar no navegador**:
+   - Abra o navegador e acesse: [http://localhost:8000](http://localhost:8000).
 
 ## Autor
 
-Desenvolvido por Diego Franco
+Desenvolvido por Diego Franco.
