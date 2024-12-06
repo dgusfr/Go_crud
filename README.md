@@ -24,7 +24,7 @@ Um projeto simples de CRUD (Create, Read, Update, Delete) desenvolvido em Go, ut
     <img src="images/go.png" alt="Logo Go" width="100"/>
   </div>
   <div style="margin-right: 20px; display: flex; justify-content: flex-start;">
-    <img src="img/html.png" alt="Logo HTML" width="100"/>
+    <img src="images/html.png" alt="Logo HTML" width="100"/>
   </div>
   <div style="margin-right: 20px; display: flex; justify-content: flex-start;">
     <img src="img/postgresql.png" alt="Logo PostgreSQL" width="100"/>
