@@ -6,7 +6,7 @@ import (
 	"go_crud/controllers"
 )
 
-// CarregaRotas configura as rotas da aplicação
+// CarregaRotas configura todas as rotas da aplicação
 func CarregaRotas() {
 	http.HandleFunc("/", controllers.Index)
 	http.HandleFunc("/new", controllers.New)

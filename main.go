@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	// Configura as rotas
+	// Configura as rotas da aplicação
 	routes.CarregaRotas()
 
 	// Inicia o servidor na porta 8000
