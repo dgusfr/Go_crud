@@ -4,8 +4,9 @@ import (
 	"database/sql"
 	"log"
 
-	"github.com/Alura/database"
+	"go_crud/database"
 )
+
 
 type Product struct {
 	Id         int

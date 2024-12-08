@@ -3,8 +3,9 @@ package routes
 import (
 	"net/http"
 
-	"github.com/Alura/controllers"
+	"go_crud/controllers"
 )
+
 
 func LoadRoutes() {
 	http.HandleFunc("/", controllers.Index)

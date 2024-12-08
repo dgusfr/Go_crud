@@ -6,8 +6,9 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/Alura/models/products"
+	"go_crud/models/products"
 )
+
 
 var templates = template.Must(template.ParseGlob("views/*.html"))
 

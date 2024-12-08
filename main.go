@@ -3,7 +3,10 @@ package main
 import (
 	"log"
 	"net/http"
+
+	"go_crud/routes"
 )
+
 
 func main() {
 	// Carrega as rotas da aplicação
