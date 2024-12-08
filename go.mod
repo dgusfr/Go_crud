@@ -1,3 +1,3 @@
-module github.com/Alura
+module go_crud
 
 go 1.23.3
