@@ -1,25 +1,27 @@
-package db
+package database
 
 import (
 	"database/sql"
 	"log"
 
-	_ "github.com/lib/pq"
+	_ "github.com/go-sql-driver/mysql" // Driver para MySQL
 )
 
-// ConectaComBancoDeDados retorna uma conexão ativa com o banco de dados PostgreSQL
-func ConectaComBancoDeDados() *sql.DB {
-	dsn := "user=root dbname=go_crud password=1234 host=localhost sslmode=disable"
-
-	db, err := sql.Open("postgres", dsn)
+// ConnectToDatabase conecta ao banco de dados MySQL
+func ConnectToDatabase() *sql.DB {
+	// Substitua as credenciais com as suas configurações
+	connStr := "root:1234@tcp(127.0.0.1:3306)/go_crud"
+	db, err := sql.Open("mysql", connStr)
 	if err != nil {
-		log.Fatalf("Erro ao abrir conexão com o banco de dados: %v", err)
+		log.Fatalf("Error opening connection to database: %v", err)
 	}
 
-	// Testa a conexão com o banco de dados
-	if err := db.Ping(); err != nil {
-		log.Fatalf("Erro ao conectar ao banco de dados: %v", err)
+	// Verifica se a conexão foi bem-sucedida
+	err = db.Ping()
+	if err != nil {
+		log.Fatalf("Error connecting to database: %v", err)
 	}
 
+	log.Println("Successfully connected to the database!")
 	return db
 }
