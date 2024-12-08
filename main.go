@@ -1,16 +1,15 @@
-package routes
+package main
 
 import (
 	"net/http"
 
-	"go_crud/controllers"
+	"go_crud/routes"
 )
 
-func CarregaRotas() {
-    http.HandleFunc("/", controllers.Index)
-    http.HandleFunc("/new", controllers.New)
-    http.HandleFunc("/insert", controllers.Insert)
-    http.HandleFunc("/delete", controllers.Delete)
-    http.HandleFunc("/edit", controllers.Edit)
-    http.HandleFunc("/update", controllers.Update)
+func main() {
+	// Configura as rotas
+	routes.CarregaRotas()
+
+	// Inicia o servidor na porta 8000
+	http.ListenAndServe(":8000", nil)
 }
