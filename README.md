@@ -39,6 +39,10 @@ Um projeto simples de CRUD (Create, Read, Update, Delete) desenvolvido em Go, ut
 
 Este projeto é uma aplicação web para gerenciar produtos em um banco de dados. Ele inclui funcionalidades para criar, visualizar, editar e excluir produtos, utilizando a linguagem Go com PostgreSQL como banco de dados e templates HTML para interface do usuário.
 
+<div align="center">
+  <img src="images/interface2.png" alt="Imagem do Projeto" width="900">
+</div>
+
 ## Funcionalidades
 
 - Listar todos os produtos cadastrados.
