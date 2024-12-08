@@ -6,8 +6,9 @@ import (
 	"net/http"
 	"strconv"
 
-	"go_crud/models/products"
+	products "go_crud/models"
 )
+
 
 
 var templates = template.Must(template.ParseGlob("views/*.html"))

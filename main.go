@@ -1,22 +1,16 @@
-package main
+package routes
 
 import (
-	"log"
 	"net/http"
 
-	"go_crud/routes"
+	"go_crud/controllers"
 )
 
-
-func main() {
-	// Carrega as rotas da aplicação
-	routes.CarregaRotas()
-
-	// Define a porta e inicia o servidor
-	port := ":8000"
-	log.Printf("Servidor iniciado na porta %s", port)
-	err := http.ListenAndServe(port, nil)
-	if err != nil {
-		log.Fatalf("Erro ao iniciar o servidor: %v", err)
-	}
+func CarregaRotas() {
+    http.HandleFunc("/", controllers.Index)
+    http.HandleFunc("/new", controllers.New)
+    http.HandleFunc("/insert", controllers.Insert)
+    http.HandleFunc("/delete", controllers.Delete)
+    http.HandleFunc("/edit", controllers.Edit)
+    http.HandleFunc("/update", controllers.Update)
 }
