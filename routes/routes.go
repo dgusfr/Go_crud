@@ -2,14 +2,15 @@ package routes
 
 import (
 	"net/http"
+
+	"github.com/Alura/controllers"
 )
 
-
 func LoadRoutes() {
-	http.HandleFunc("/", productsController.Index)
-	http.HandleFunc("/new", productsController.New)
-	http.HandleFunc("/insert", productsController.Insert)
-	http.HandleFunc("/delete", productsController.Delete)
-	http.HandleFunc("/edit", productsController.Edit)
-	http.HandleFunc("/update", productsController.Update)
+	http.HandleFunc("/", controllers.Index)
+	http.HandleFunc("/new", controllers.New)
+	http.HandleFunc("/insert", controllers.Insert)
+	http.HandleFunc("/delete", controllers.Delete)
+	http.HandleFunc("/edit", controllers.Edit)
+	http.HandleFunc("/update", controllers.Update)
 }
