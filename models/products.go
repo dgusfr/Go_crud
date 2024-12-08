@@ -1,25 +1,22 @@
-package products
+package models
 
 import (
-	"database/sql"
 	"log"
 
 	"go_crud/database"
 )
 
-
-
-
 type Product struct {
-	Id         int
-	Name       string
+	Id          int
+	Name        string
 	Description string
-	Price      float64
-	Quantity   int
+	Price       float64
+	Quantity    int
 }
 
+// GetAllProducts retorna todos os produtos do banco de dados
 func GetAllProducts() []Product {
-	db := database.ConnectToDatabase()
+	db := database.ConnectToDatabase() // Conexão usando o pacote "database"
 	defer db.Close()
 
 	rows, err := db.Query("SELECT id, name, description, price, quantity FROM products")
@@ -29,11 +26,10 @@ func GetAllProducts() []Product {
 	defer rows.Close()
 
 	var products []Product
-
 	for rows.Next() {
 		var product Product
 		if err := rows.Scan(&product.Id, &product.Name, &product.Description, &product.Price, &product.Quantity); err != nil {
-			log.Fatalf("Error reading product: %v", err)
+			log.Fatalf("Error scanning product: %v", err)
 		}
 		products = append(products, product)
 	}
@@ -41,6 +37,7 @@ func GetAllProducts() []Product {
 	return products
 }
 
+// CreateNewProduct insere um novo produto no banco de dados
 func CreateNewProduct(name, description string, price float64, quantity int) {
 	db := database.ConnectToDatabase()
 	defer db.Close()
@@ -51,6 +48,7 @@ func CreateNewProduct(name, description string, price float64, quantity int) {
 	}
 }
 
+// DeleteProduct remove um produto pelo ID
 func DeleteProduct(id string) {
 	db := database.ConnectToDatabase()
 	defer db.Close()
@@ -61,6 +59,7 @@ func DeleteProduct(id string) {
 	}
 }
 
+// EditProduct retorna os dados de um produto pelo ID
 func EditProduct(id string) Product {
 	db := database.ConnectToDatabase()
 	defer db.Close()
@@ -70,15 +69,13 @@ func EditProduct(id string) Product {
 
 	var product Product
 	if err := row.Scan(&product.Id, &product.Name, &product.Description, &product.Price, &product.Quantity); err != nil {
-		if err == sql.ErrNoRows {
-			log.Fatalf("Product with ID %s not found", id)
-		}
 		log.Fatalf("Error fetching product: %v", err)
 	}
 
 	return product
 }
 
+// UpdateProduct atualiza os dados de um produto no banco de dados
 func UpdateProduct(id int, name, description string, price float64, quantity int) {
 	db := database.ConnectToDatabase()
 	defer db.Close()
